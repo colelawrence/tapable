@@ -1,12 +1,9 @@
 import * as path from "path"
 import * as fs from "fs"
-
-import { transpile } from './transpiler'
+import { transpile } from "./transpiler";
 
 const TEMPLATE_PATH = path.resolve(__dirname, "./types.template.ts")
-const OUTPUT_PATH = path.resolve(__dirname, "../types.build.d.ts")
-
-const NUMBER_OF_LOOPS = 3
+const OUTPUT_PATH = path.resolve(__dirname, "../types-test/index.d.ts")
 
 // Will print result information
 const DEBUG: boolean = /^(1|true)$/.test(process.env["DEBUG"])
@@ -18,5 +15,5 @@ result = transpile(result)
 result = `/** Generated from ${path.relative(path.dirname(OUTPUT_PATH), TEMPLATE_PATH)} */\n` + result
 
 // for testing
-console.log(result)
+// console.log(result)
 fs.writeFileSync(OUTPUT_PATH, result, "utf8")
