@@ -155,13 +155,14 @@ loop: (...args) => void Adding loop to your interceptor will trigger for each lo
 // HookMap
 // A HookMap is a helper class for a Map with Hooks
 
-const keyedHook = new HookMap<string, HookSync1<void, string>>(key => new SyncHook(["arg"]))
+const keyedHook: HookMap<string, HookSync1<void, any>> = new HookMap((key: string) => new SyncHook(["arg"]))
 keyedHook.tap("some-key", "MyPlugin", (arg: any) => { /* ... */ });
 keyedHook.tapAsync("some-key", "MyPlugin", (arg: any, callback: () => void) => { /* ... */ });
 keyedHook.tapPromise("some-key", "MyPlugin", (arg: any) => { /* ... */ });
 const hook = keyedHook.get("some-key");
 if (hook !== undefined) {
-    hook.callAsync("arg", err => { /* ... */ });
+    // hook.callAsync("arg", err => { /* ... */ });
+    hook.call("arg");
 }
 
 //  Hook/HookMap interface
@@ -220,4 +221,4 @@ interface HookMap {
 
 // const { MultiHook } = require("tapable");
 
-this.hooks.allHooks = new MultiHook([this.hooks.hookA, this.hooks.hookB]);
+const allHooks = new MultiHook([this.hooks.hookA, this.hooks.hookB]);

@@ -3933,7 +3933,7 @@ declare module "tapable" {
 	}
 
 	export interface HookMap<K = any, Hook = HookObject> {
-		new <K, Hook> (factory: (key: K) => Hook): this
+		new(factory: (key: K) => Hook): this
 		get(key: K): Hook
 		for(key: K): Hook
 		intercept(interceptor: HookMapInterceptor<K>): void
